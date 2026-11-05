@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập hàm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .card { @apply rounded-xl bg-white p-6 shadow-md; }
+      .lbl { @apply mb-1 mt-3 block text-sm font-semibold text-slate-700; }
+      .inp { @apply w-full rounded-md border border-slate-300 px-3 py-2 text-[15px] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200; }
+      .btn { @apply mt-4 rounded-lg bg-blue-600 px-6 py-2.5 font-semibold text-white transition hover:bg-blue-700; }
+      .hint { @apply mb-4 rounded-lg bg-indigo-50 px-4 py-2.5 text-sm; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+  <div class="mx-auto max-w-3xl px-4 pb-16 pt-5">
+
+    <!-- Tabs -->
+    <div class="mb-4 flex flex-wrap gap-2">
+      <button id="tabBtn1" onclick="showTab(1)" class="min-w-[80px] flex-1 rounded-lg bg-blue-600 px-3 py-2.5 font-semibold text-white">Bài 1</button>
+      <button id="tabBtn2" onclick="showTab(2)" class="min-w-[80px] flex-1 rounded-lg bg-slate-200 px-3 py-2.5 font-semibold text-slate-700">Bài 2</button>
+      <button id="tabBtn3" onclick="showTab(3)" class="min-w-[80px] flex-1 rounded-lg bg-slate-200 px-3 py-2.5 font-semibold text-slate-700">Bài 3</button>
+      <button id="tabBtn4" onclick="showTab(4)" class="min-w-[80px] flex-1 rounded-lg bg-slate-200 px-3 py-2.5 font-semibold text-slate-700">Bài 4</button>
+    </div>
+
+    
+
+    <!-- BÀI 1 -->
+    <div id="bai1" class="card">
+      <h4 class="mb-3 text-xl font-bold">🏫 Quản lý tuyển sinh</h4>
+   
+
+      <label for="diemChuan" class="lbl">Điểm chuẩn</label>
+      <input type="number" id="diemChuan" class="inp" placeholder="Ví dụ: 20" min="0" step="0.25">
+
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div><label for="diemMon1" class="lbl">Điểm môn 1</label><input type="number" id="diemMon1" class="inp" min="0" max="10" step="0.25"></div>
+        <div><label for="diemMon2" class="lbl">Điểm môn 2</label><input type="number" id="diemMon2" class="inp" min="0" max="10" step="0.25"></div>
+        <div><label for="diemMon3" class="lbl">Điểm môn 3</label><input type="number" id="diemMon3" class="inp" min="0" max="10" step="0.25"></div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div>
+          <label for="khuVuc" class="lbl">Chọn khu vực</label>
+          <select id="khuVuc" class="inp">
+            <option value="X">X (không ưu tiên)</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+        </div>
+        <div>
+          <label for="doiTuong" class="lbl">Chọn đối tượng</label>
+          <select id="doiTuong" class="inp">
+            <option value="0">0 (không ưu tiên)</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="btnTuyenSinh" onclick="tinhTuyenSinh()" class="btn">Kết Quả</button>
+      <div id="ketQuaBai1" class="mt-4 min-h-[48px] rounded-lg border border-dashed border-slate-300 bg-slate-50 px-4 py-3 leading-relaxed">👉</div>
+    </div>
+
+    <!-- BÀI 2 -->
+    <div id="bai2" class="card hidden">
+      <h4 class="mb-3 text-xl font-bold">🔋 Tính tiền điện</h4>
+     
+
+      <label for="tenDien" class="lbl">Tên</label>
+      <input type="text" id="tenDien" class="inp" placeholder="Nhập tên khách hàng">
+      <label for="soKw" class="lbl">Số kw tiêu thụ</label>
+      <input type="number" id="soKw" class="inp" placeholder="Ví dụ: 250" min="0">
+
+      <button id="btnTinhDien" onclick="tinhTienDien()" class="btn">Tính tiền điện</button>
+      <div id="ketQuaBai2" class="mt-4 min-h-[48px] rounded-lg border border-dashed border-slate-300 bg-slate-50 px-4 py-3 leading-relaxed">👉</div>
+    </div>
+
+    <!-- BÀI 3 -->
+    <div id="bai3" class="card hidden">
+      <h4 class="mb-3 text-xl font-bold">💰 Tính thuế thu nhập cá nhân</h4>
+      
+
+      <label for="hoTen" class="lbl">Họ tên</label>
+      <input type="text" id="hoTen" class="inp" placeholder="Nhập họ tên">
+      <label for="tongThuNhap" class="lbl">Tổng thu nhập năm (VNĐ)</label>
+      <input type="number" id="tongThuNhap" class="inp" placeholder="Ví dụ: 120000000" min="0">
+      <label for="soNguoiPhuThuoc" class="lbl">Số người phụ thuộc</label>
+      <input type="number" id="soNguoiPhuThuoc" class="inp" placeholder="Ví dụ: 1" min="0" step="1">
+
+      <button id="btnTinhThue" onclick="tinhThue()" class="btn">Tính tiền thuế</button>
+      <div id="ketQuaBai3" class="mt-4 min-h-[48px] rounded-lg border border-dashed border-slate-300 bg-slate-50 px-4 py-3 leading-relaxed">👉</div>
+    </div>
+
+    <!-- BÀI 4 -->
+    <div id="bai4" class="card hidden">
+      <h4 class="mb-3 text-xl font-bold">🕸️ Tính tiền cáp</h4>
+     
+
+      <label for="maKhachHang" class="lbl">Mã khách hàng</label>
+      <input type="text" id="maKhachHang" class="inp" placeholder="Ví dụ: KH001">
+
+      <label for="loaiKhachHang" class="lbl">Chọn loại khách hàng</label>
+      <select id="loaiKhachHang" class="inp" onchange="anHienKetNoi()">
+        <option value="nhadan">Nhà Dân</option>
+        <option value="doanhnghiep">Doanh Nghiệp</option>
+      </select>
+
+      <div id="boxKetNoi" class="hidden">
+        <label for="soKetNoi" class="lbl">Số kết nối</label>
+        <input type="number" id="soKetNoi" class="inp" placeholder="Ví dụ: 12" min="0" step="1">
+      </div>
+
+      <label for="soKenhCaoCap" class="lbl">Số kênh cao cấp</label>
+      <input type="number" id="soKenhCaoCap" class="inp" placeholder="Ví dụ: 3" min="0" step="1">
+
+      <button id="btnTinhCap" onclick="tinhTienCap()" class="btn">Tính tiền cáp</button>
+      <div id="ketQuaBai4" class="mt-4 min-h-[48px] rounded-lg border border-dashed border-slate-300 bg-slate-50 px-4 py-3 leading-relaxed">👉</div>
+    </div>
+  </div>
+
+  <script src="dom.js"></script>
+</body>
+</html>
